@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ 'app.pages.extras.profileone.title.header' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="animated fadeIn">
+  <div class="profile-bg" [ngStyle]="{'background-image': 'url(' + imageUrl +')'}"></div>
+  <ion-card class="bg-white">
+    <ion-card-content class="content">
+      <div class="profile-info">
+        <img class="profile-image" src="assets/img/avatar.jpeg">
+        <h3 class="profile-name">João Firmino</h3>
+        <span class="profile-description">Traveler, geek and animal lover.</span>
+        <p>Follow my <a href="https://twitter.com/ionicframework">@facebook</a> and
+          <a href="https://twitter.com/driftyco">@twitter</a> accounts.</p>
+      </div>
+      <ion-list>
+        <ion-item no-margin no-padding *ngFor="let post of posts">
+          <img class="post-profile-image" src="assets/img/avatar.jpeg"> {{post.text}}
+          <div class="post-time">{{post.created_at}} something</div>
+          <div class="post-options">
+            <ion-icon name="undo"></ion-icon>
+          </div>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

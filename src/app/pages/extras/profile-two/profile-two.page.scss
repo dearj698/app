@@ -1,0 +1,73 @@
+:host {
+  ion-content {
+    --background: linear-gradient(135deg, var(--ion-color-dark), var(--ion-color-primary))
+  }
+}
+  
+  // Cover image
+  .profile-bg {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    margin-top: -16px;
+    height: 160px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    text-align: center;
+  }
+  // Profile content
+  .content {
+    position: relative;
+    margin-top: -145px;
+    padding-top: 200px;
+    text-align: center;
+  }
+  .profile-image {
+    display: block;
+    border-radius: 50%;
+    width: auto;
+    height: 100px;
+    margin: 20px auto 20px;
+    box-shadow: 0px 2px 20px rgba(0, 0, 0, .5);
+  }
+  .profile-info {
+    width: 100%;
+    z-index: 2;
+    text-align: center;
+  }
+  .profile-name {
+    color: #444;
+    font-size: 26px;
+  }
+  .profile-description {
+    font-size: 15px;
+    color: #888;
+  }
+  .follow-button {
+    text-transform: none;
+    border-radius: 3px !important;
+    ion-icon {
+      font-weight: bold;
+      padding-left: 5px;
+      font-size: 2.5rem;
+    }
+  }
+  // Following, Followers and all..
+  .profile-numbers {
+    p {
+      color: #444;
+      font-size: medium;
+      margin-bottom: 3px;
+    }
+    span {
+      font-weight: bold;
+      font-size: 2.4rem;
+      color: #34354c;
+    }
+  }
+
+  // Posts feed
+  .posts {
+    text-align: justify;
+  }

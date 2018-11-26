@@ -1,0 +1,73 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-menu-button color="light"></ion-menu-button>
+        <ion-title>Home</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-slides pager="true" [options]="slideOpts">
+        <ion-slide>
+            <ion-img no-margin  class="displayed"   src="../../assets/img/img1.jpg"></ion-img>
+        </ion-slide>
+        <ion-slide>
+            <ion-img no-margin  class="displayed"   src="../../assets/img/img2.jpg"></ion-img>
+        </ion-slide>
+        <ion-slide>
+            <ion-img no-margin  class="displayed"   src="../../assets/img/img3.jpg"></ion-img>
+        </ion-slide>
+    </ion-slides>
+    <ion-grid [fixed]="true">
+        <ion-row>
+            <ion-col>
+                <ion-card no-margin="true" style="height: 140px" color="light">
+                    <img src="../../../assets/img/doctor.png"  (click)="go()" class="call_img">
+                </ion-card>
+            </ion-col>
+            <ion-col>
+                <ion-card no-margin="true"  style="height: 140px" color="light">
+                    <img src="../../../assets/img/wait.png"  class="call_img">
+                </ion-card>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-card no-margin="true" style="height: 140px"color="light">
+                    <img src="../../../assets/img/emerg.png" class="emer_img">
+                </ion-card>
+            </ion-col>
+            <ion-col>
+                <ion-card no-margin="true" style="height: 140px" color="light">
+                    <img src="../../../assets/img/call.png" class="call_img">
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+
+<ion-footer class="animated fadeIn">
+    <ion-toolbar color="primary">
+        <ion-grid no-padding>
+            <ion-row>
+                <ion-col size="4" no-padding>
+                    <ion-button size="small" shape="round" expand="full" fill="clear" color="light" routerLink="/home">
+                        <ion-icon slot="start" name="home"></ion-icon>
+                        home
+                    </ion-button>
+                </ion-col>
+                <ion-col size="4" no-padding>
+                    <ion-button size="small" shape="round" expand="full" fill="clear" color="light" routerLink="/booking-list">
+                        <ion-icon slot="start" name="beer"></ion-icon>
+                        bookings
+                    </ion-button>
+                </ion-col>
+                <ion-col size="4" no-padding>
+                    <ion-button size="small" shape="round" expand="full" fill="clear" color="light" routerLink="/about">
+                        <ion-icon slot="start" name="cog"></ion-icon>
+                        {{ 'app.pages.menu.settings' | translate }}
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+</ion-footer>

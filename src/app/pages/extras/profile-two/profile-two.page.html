@@ -1,0 +1,115 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ 'app.pages.extras.profiletwo.title.header' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="animated fadeIn">
+  <div class="profile-bg" [ngStyle]="{'background-image': 'url(' + user.coverImage +')'}"></div>
+  <div class="content">
+    <div class="profile-info" padding>
+      <img class="profile-image" [src]="user.profileImage">
+      <ion-card class="bg-dark" no-margin>
+        <ion-card-content>
+          <h3 class="profile-name">
+            <ion-text color="light">
+              {{user.name}}
+            </ion-text>
+          </h3>
+          <p>
+            <ion-text color="secondary">
+              {{user.occupation}} &bull; {{user.location}}
+            </ion-text>
+          </p>
+          <p class="profile-description">
+            <ion-text color="light">
+              {{user.description}}
+            </ion-text>
+          </p>
+          <ion-button *ngIf="!following" size="small" color="tertiary">Follow</ion-button>
+          <ion-button *ngIf="following" class="follow-button" size="small" color="tertiary">Following<ion-icon
+              name="checkmark"></ion-icon>
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <ion-row class="profile-numbers">
+      <ion-col size="4" class="bg-primary">
+        <p>
+          <ion-text color="secondary">
+            Followers
+          </ion-text>
+        </p>
+        <h1 no-margin>
+          <ion-text color="light">
+            {{user.followers}}
+          </ion-text>
+        </h1>
+      </ion-col>
+      <ion-col size="4" class="bg-primary">
+        <p>
+          <ion-text color="secondary">
+            Following
+          </ion-text>
+        </p>
+        <h1 no-margin>
+          <ion-text color="light">
+            {{user.following}}
+          </ion-text>
+        </h1>
+      </ion-col>
+      <ion-col size="4" class="bg-primary">
+        <p>
+          <ion-text color="secondary">
+            Posts
+          </ion-text>
+        </p>
+        <h1 no-margin>
+          <ion-text color="light">
+            {{user.posts}}
+          </ion-text>
+        </h1>
+      </ion-col>
+    </ion-row>
+    <div class="posts">
+      <ion-card class="bg-white" *ngFor="let post of posts">
+        <ion-item>
+          <ion-avatar slot="start">
+            <img [src]="user.profileImage">
+          </ion-avatar>
+          <ion-label>
+            <h2 class="sticky">{{user.name}}</h2>
+            <p>{{post.date}}</p>
+          </ion-label>
+        </ion-item>
+        <img [src]="post.postImageUrl">
+        <ion-card-content>
+          <p>{{post.text}}</p>
+        </ion-card-content>
+        <ion-row>
+          <ion-col size="4">
+            <ion-button color="primary" size="small" icon-left>
+              <ion-icon name='thumbs-up'></ion-icon>
+              {{post.likes}} Likes
+            </ion-button>
+          </ion-col>
+          <ion-col size="5">
+            <ion-button color="secondary" size="small" icon-left>
+              <ion-icon name='text'></ion-icon>
+              {{post.comments}} Comments
+            </ion-button>
+          </ion-col>
+          <ion-col size="3" align-self-center text-center>
+            <p>
+              {{post.timestamp}}
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

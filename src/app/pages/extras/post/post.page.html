@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ 'app.pages.extras.post.title.header' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <img [src]="post.postImageUrl">
+
+  <ion-card class="bg-white">
+      <ion-item>
+        <ion-avatar slot="start">
+          <img [src]="user.profileImage">
+        </ion-avatar>
+        <ion-label>
+          <h2 class="sticky">{{user.name}}</h2>
+          <p>{{post.date}}</p>
+        </ion-label>
+      </ion-item>
+      <ion-card-content>
+        <h1>
+          <ion-text color="primary">
+            {{post.title}}
+          </ion-text>
+        </h1>
+        <p>{{post.text}}</p>
+      </ion-card-content>
+      <ion-row>
+        <ion-col size="6">
+          <ion-button color="primary" size="full" icon-left>
+            <ion-icon name='thumbs-up'></ion-icon>
+            {{post.likes}} Likes
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button color="secondary" size="full" icon-left>
+            <ion-icon name='text'></ion-icon>
+            {{post.comments}} Comments
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+</ion-content>

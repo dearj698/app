@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ 'app.pages.extras.charts.title.header' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="bg-white">
+    <ion-card-header>
+      Pie Chart
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button (click)="updateData()">Update Pie Chart Data</ion-button>
+      <canvas #pieCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-card class="bg-white">
+    <ion-card-header>
+      Bar Chart
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #barCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="bg-white">
+    <ion-card-header>
+      Doughnut Chart
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #doughnutCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="bg-white">
+    <ion-card-header>
+      Half Doughnut Chart
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #halfDoughnutCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="bg-white">
+    <ion-card-header>
+      Line Chart
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #lineCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="bg-white">
+    <ion-card-header>
+      Radar Chart
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #radarCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="bg-white">
+    <ion-card-header>
+      Polar Area Chart
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #polarCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="bg-white">
+    <ion-card-header>
+      Bubble Chart
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #bubbleCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="bg-white">
+    <ion-card-header>
+      Mixed Chart
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #mixedCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

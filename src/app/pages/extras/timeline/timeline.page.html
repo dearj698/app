@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ 'app.pages.extras.timeline.title.header' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+	<ul class="timeline">
+
+		<li *ngFor="let item of items">
+			<div [class]="item.dir">
+				<div class="flag-wrapper">
+					<span class="flag"><ion-text color="dark">{{item.title}}</ion-text></span>
+					<span class="time-wrapper"><span class="time">{{item.time.subtitle}} {{item.time.title}}</span></span>
+				</div>
+				<div class="desc"><ion-text color="primary">{{item.content}}</ion-text></div>
+			</div>
+		</li>
+
+	</ul>
+</ion-content>

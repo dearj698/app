@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ 'app.pages.extras.title.header' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="animated fadeIn">
+  <ion-list class="bg-primary" [@staggerIn]='listExtras.length'>
+    <ion-item [routerDirection]="[extra.direct]" [routerLink]="[extra.url]" color="primary" *ngFor="let extra of listExtras; let i = index">
+      <ion-icon slot="start" [name]="extra.icon"></ion-icon>
+      <ion-label>
+        {{extra.title}}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
