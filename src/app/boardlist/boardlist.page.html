@@ -8,34 +8,10 @@
 </ion-header>
 
 <ion-content padding class="videos" >
-    <video width="400" height="250" margin-start="-30" [vgMedia]="media" #media id="singleVideo" preload="auto" controls>
-        <source src="http://10.255.177.154/hls/test.m3u8" type="video/mp4">
+    <video class="videogular-container" width="400" height="250" margin-start="-30" [vgMedia]="media" #media id="singleVideo" preload="auto" controls>
+        <source src="http://ec2-18-218-28-80.us-east-2.compute.amazonaws.com/hls/test.m3u8" type="video/mp4">
     </video>
-    <ion-card color="light">
-        <ion-card-header color="secondary">
-            <ion-card-title>Status: waiting</ion-card-title>
-            <ion-card-subtitle>current time: 2:12 pm</ion-card-subtitle>
-        </ion-card-header>
-        <ion-item href="#" class="activated">
-            <ion-icon name="eye" slot="start"></ion-icon>
-            <ion-label>Current postion: 24</ion-label>
-        </ion-item>
-
-        <ion-item href="#">
-            <ion-icon name="happy" slot="start"></ion-icon>
-            <ion-label>25: Jerry</ion-label>
-        </ion-item>
-
-        <ion-item class="activated">
-            <ion-icon name="happy" slot="start"></ion-icon>
-            <ion-label>26: Henry</ion-label>
-        </ion-item>
-
-        <ion-item>
-            <ion-icon name="happy" slot="start"></ion-icon>
-            <ion-label>27: Tom</ion-label>
-        </ion-item>
-    </ion-card>
+    <img margin-top="1000" src="../../assets/img/logo.gif">
 </ion-content>
 
 

@@ -53,7 +53,7 @@ export class WalkthroughPage implements OnInit {
     this.slides.slideNext(1000, false);
   }
 
-	onSlidePrev() {
+  onSlidePrev() {
     this.slides.slidePrev(300);
   }
 
@@ -67,7 +67,7 @@ export class WalkthroughPage implements OnInit {
   }
 
   openLoginPage() {
-    this.navCtrl.navigateForward('/login');
+    this.navCtrl.navigateForward('/extras/authentication');
   }
 
 }

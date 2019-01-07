@@ -1,11 +1,4 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>{{ 'app.pages.extras.auth.title.header' | translate }}</ion-title>
-  </ion-toolbar>
-</ion-header>
+
 
 <ion-content padding class="animated fadeIn login auth-page">
   <div class="auth-content">
@@ -68,7 +61,7 @@
           </p>
       
           <div>
-            <ion-button icon-left size="medium" expand="full" shape="round" color="dark" [disabled]="!onLoginForm.valid" tappable>
+            <ion-button icon-left size="medium" expand="full" shape="round" color="dark" [disabled]="!onLoginForm.valid" tappable (click)="goToHome()">
               <ion-icon name="log-in"></ion-icon>
               {{ 'app.button.signin' | translate }}
             </ion-button>

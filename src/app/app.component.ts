@@ -108,6 +108,6 @@ initializeApp() {
  * @memberof AppComponent
  */
 logout() {
-    this.navCtrl.navigateRoot('login');
+    this.navCtrl.navigateRoot('extras/authentication');
   }
 }
