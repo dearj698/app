@@ -1,21 +1,30 @@
 <ion-header>
     <ion-toolbar color="primary">
-        <ion-menu-button color="light"></ion-menu-button>
+        <ion-menu-button color="light" slot="start"></ion-menu-button>
+
+        <ion-title>
+            <ion-text color="light">
+                <!-- [placeholder]="translate.get('userlist.search')" -->
+                <!-- {{ 'app.name' | translate }} -->
+                Hos<ion-text color="secondary" class="fw700">Tream</ion-text>
+            </ion-text>
+        </ion-title>
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="whitesmoke">
     <ion-slides pager="true" [options]="slideOpts">
         <ion-slide>
             <ion-img no-margin  class="displayed"   src="../../assets/img/img1.jpg"></ion-img>
         </ion-slide>
         <ion-slide>
-            <ion-img no-margin  class="displayed"   src="../../assets/img/img2.jpg"></ion-img>
+            <ion-img no-margin  class="displayed"   src="../../assets/img2/img2.jpg"></ion-img>
         </ion-slide>
         <ion-slide>
             <ion-img no-margin  class="displayed"   src="../../assets/img/img3.jpg"></ion-img>
         </ion-slide>
     </ion-slides>
+    <ion-button class="slogan" expand="full">Tips for First Time Patients</ion-button>
     <ion-grid [fixed]="true">
         <ion-row>
             <ion-col>
