@@ -1,13 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {NavController} from '@ionic/angular';
-
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions/ngx';
 @Component({
     selector: 'app-home',
     templateUrl: './home.page.html',
     styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
+    options: NativeTransitionOptions = {
+        direction: 'left',
+        duration: 500,
+        slowdownfactor: -1,
+        slidePixels: 20,
+        iosdelay: 50,
+        androiddelay: 100,
+        fixedPixelsTop: 0,
+        fixedPixelsBottom: 60
+    };
     items = [
         {
             name: 'one',
@@ -37,9 +47,16 @@ export class HomePage implements OnInit {
                 }]
         },
     ];
-    constructor(private nav: NavController, private router: Router) {}
-    ngOnInit() {}
+    constructor(private nav: NavController, private router: Router, private nativePageTransitions: NativePageTransitions) {}
+    ngOnInit() {
+    }
     go() {
+        this.nativePageTransitions.slide(this.options);
         this.router.navigate(['boardlist']);
+    }
+    goBookcase() {
+        this.nativePageTransitions.slide(this.options);
+
+        this.router.navigate(['bookcase']);
     }
 }

@@ -2,16 +2,15 @@ video{
     margin-left: -17px;
     margin-top: -30px;
 }
-ion-content {
-    --background: linear-gradient(-135deg, var(--ion-color-medium), var(--ion-color-light))
-}
 .videogular-container {
     width: 100%;
     height: 320px;
     margin: auto;
     overflow: hidden;
 }
-
+ion-fab-button{
+    --box-shadow: 0 4px 10px #6b6b6b;
+}
 @media (min-width: 1200px) {
     .videogular-container {
         width: 1170px;

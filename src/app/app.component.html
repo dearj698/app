@@ -9,7 +9,7 @@
               <img src="assets/img/avartar.jpg">
             </ion-avatar>
             <ion-label>
-              <ion-text color="tertiary">
+              <ion-text color="light">
                 <h1><strong>Andrew Parrent</strong></h1>
               </ion-text>
               <ion-text color="secondary">
@@ -19,13 +19,13 @@
               </ion-text>
               <ion-menu-toggle class="mto" auto-hide="false">
                 <a class="text08" tappable (click)="goToEditProgile()">
-                  <ion-text color="tertiary">
+                  <ion-text color="light">
                     <ion-icon name="contact"></ion-icon>
                     <strong>{{ 'app.pages.menu.editprofile' | translate }}</strong>
                   </ion-text>
                 </a> <ion-text color="secondary"> | </ion-text> 
                 <a class="text08" tappable (click)="logout()">
-                  <ion-text color="tertiary">
+                  <ion-text color="light">
                     <ion-icon name="log-out"></ion-icon>
                     <strong>{{ 'app.pages.menu.logout' | translate }}</strong>
                   </ion-text>
@@ -40,7 +40,7 @@
       <ion-content class="bg-profile">
         <ion-list>
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
-            <ion-item [routerDirection]="[p.direct]" [routerLink]="[p.url]" color="primary">
+            <ion-item [routerDirection]="[p.direct]" [routerLink]="[p.url]" color="light">
               <ion-icon slot="start" [name]="p.icon"></ion-icon>
               <ion-label>
                 {{p.title}}
