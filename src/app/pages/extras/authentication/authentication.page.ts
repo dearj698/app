@@ -48,9 +48,10 @@ export class AuthenticationPage implements OnInit {
       ])]
     });
   }
-  login() {
-      this.Userclient.checkUser(this.onLoginForm.get('email').value, this.onLoginForm.get('password').value);
-  }
+  goToHome() {
+        this.router.navigate(['/home']);
+    }
+
   register() {
       // tslint:disable-next-line:max-line-length
     this.Userclient.updateUser(this.onRegisterForm.get('password').value, this.onRegisterForm.get('fullName').value, 'Jerry', this.onRegisterForm.get('email').value);

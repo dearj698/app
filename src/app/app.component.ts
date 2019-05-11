@@ -39,8 +39,6 @@ export class AppComponent {
    * @param {NavController} navCtrl
    * @memberof AppComponent
    */
-  private name: string;
-  private email: string;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -95,8 +93,6 @@ initializeApp() {
         this.translate.setTranslations(translations);
       });
     });
-    this.email = localStorage.getItem('email');
-    this.name = localStorage.getItem('name');
   }
   /**
    * Navigate to Edit Profile Page
