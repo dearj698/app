@@ -148,7 +148,7 @@
       
           <div margin-top>
             <ion-button icon-left size="medium" expand="full" shape="round" color="dark" [disabled]="!onRegisterForm.valid"
-              tappable>
+              (click)="register()" tappable>
               <ion-icon name="log-in"></ion-icon>
               Sign Up
             </ion-button>

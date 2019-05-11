@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController, MenuController, ToastController, AlertController, LoadingController } from '@ionic/angular';
 import { TranslateProvider } from '../../../providers';
 import {Router} from '@angular/router';
+import {UserService} from '../../../services/user.service';
 
 @Component({
   selector: 'app-authentication',
@@ -22,7 +23,8 @@ export class AuthenticationPage implements OnInit {
     public loadingCtrl: LoadingController,
     private translate: TranslateProvider,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private Userclient: UserService
   ) { }
 
   ngOnInit() {
@@ -49,6 +51,11 @@ export class AuthenticationPage implements OnInit {
   goToHome() {
         this.router.navigate(['/home']);
     }
+
+  register() {
+      // tslint:disable-next-line:max-line-length
+    this.Userclient.updateUser(this.onRegisterForm.get('password').value, this.onRegisterForm.get('fullName').value, 'Jerry', this.onRegisterForm.get('email').value);
+  }
   async forgotPass() {
     const alert = await this.alertCtrl.create({
       header: this.translate.get('app.pages.login.label.forgot'),
