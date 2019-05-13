@@ -35,8 +35,9 @@ const routes: Routes = [
   { path: 'extras/popupmenu', loadChildren: './pages/extras/popupmenu/popupmenu.module#PopupmenuPageModule' },
   { path: 'extras/charts', loadChildren: './pages/extras/charts/charts.module#ChartsPageModule' },
   { path: 'extras/post', loadChildren: './pages/extras/post/post.module#PostPageModule' },
-  { path: 'boardlist', loadChildren: './boardlist/boardlist.module#BoardlistPageModule' },  { path: 'bookcase', loadChildren: './bookcase/bookcase.module#BookcasePageModule' },
-  { path: 'surgeonList', loadChildren: './surgeon-list/surgeon-list.module#SurgeonListPageModule' },
+  { path: 'boardlist', loadChildren: './boardlist/boardlist.module#BoardlistPageModule' },
+  { path: 'bookcase', loadChildren: './bookcase/bookcase.module#BookcasePageModule' },
+  { path: 'list', loadChildren: './list/list.module#ListPageModule' },
 
   // { path: 'walkthrough', loadChildren: './pages/walkthrough/walkthrough.module#WalkthroughPageModule' }
 ];

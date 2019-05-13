@@ -16,7 +16,7 @@ export class PopmenuComponent implements OnInit {
 
   togglePopupMenu() {
     return this.openMenu = !this.openMenu;
-  } 
+  }
 
   // // //
   settings() {

@@ -7,6 +7,8 @@ import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/na
 import { IonicModule } from '@ionic/angular';
 
 import { BookcasePage } from './bookcase.page';
+import {ListPage} from '../list/list.page';
+import {ListPageModule} from '../list/list.module';
 
 const routes: Routes = [
   {

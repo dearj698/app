@@ -32,6 +32,7 @@
                     <ion-item button lines="none" (click)="go()">
                         <ion-icon name="contact" color="dark"></ion-icon>
                         <ion-label stacked color="dark" class="my-label">Surgeon Name</ion-label>
+                        <ion-text color='secondary'>{{nameSelected}}</ion-text>
                     </ion-item>
         </ion-card-content>
     </ion-card>
@@ -39,9 +40,10 @@
         <ion-card-content>
             <ion-card-subtitle color="dark">Priority</ion-card-subtitle>
             <ion-item lines="none">
-                <ion-range min="1000" max="2000" step="250" snaps="true" ticks="false" color="dark"></ion-range>
+                <ion-range min="1" max="4" step="1" snaps="true" ticks="false" color="dark"  [(ngModel)]="prioritySelected" (ionChange)="show(prioritySelected)"></ion-range>
                 <ion-icon color="dark" size="small" slot="start" name="warning"></ion-icon>
                 <ion-icon color="dark" slot="end" name="warning"></ion-icon>
+                <ion-text color="secondary">{{priority}}</ion-text>
             </ion-item>
         </ion-card-content>
     </ion-card>

@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-title color="dark">Surgeon List</ion-title>
+      <ion-buttons slot="end">
+          <ion-button size="small" shape="round" (click)="close(chosenName)" color="tertiary">
+              <ion-icon slot="start" name="close"></ion-icon> Close
+          </ion-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list [@staggerIn]='surgeonList.length'>
+        <ion-list-header>
+            <ion-label>A</ion-label>
+        </ion-list-header>
+        <ion-item tappable *ngFor="let surgeon of surgeonList" (click)="select(surgeon.name)">
+            <ion-icon slot="start" [name]="surgeon.icon"></ion-icon>
+            <ion-text>{{surgeon.name}}</ion-text>
+        </ion-item>
+    </ion-list>
+</ion-content>
