@@ -12,18 +12,31 @@
 </ion-header>
 
 <ion-content color="whitesmoke">
-    <ion-slides pager="true" [options]="slideOpts">
+    <ion-slides [options]="slideOpts">
         <ion-slide>
-            <ion-img no-margin  class="displayed"   src="../../assets/img/img1.jpg"></ion-img>
+            <ion-card style="width: 400px ; height: 300px">            
+                <ion-img no-margin  class="displayed"   src="../../assets/img/img1.jpg"></ion-img>
+            </ion-card>
         </ion-slide>
         <ion-slide>
-            <ion-img no-margin  class="displayed"   src="../../assets/img/img2.jpg"></ion-img>
-        </ion-slide>
-        <ion-slide>
-            <ion-img no-margin  class="displayed"   src="../../assets/img/img3.jpg"></ion-img>
+            <ion-card style="width: 400px ; height: 300px">
+                <ion-card-header color="primary">TODO
+                </ion-card-header>
+                <ion-card-content>
+                    <ion-item *ngFor="let todo of todos">
+                        <ion-icon slot="start" name="arrow-dropright"></ion-icon>
+                        <ion-label>{{todo.content}}</ion-label>
+                        <ion-text color="secondary">by {{todo.duedate}}</ion-text>
+                    </ion-item>
+                    <ion-item>
+                        <ion-icon slot="start" name="add"></ion-icon>
+                        <ion-label>todo:</ion-label>
+                        <ion-input></ion-input>
+                    </ion-item>
+                </ion-card-content>
+            </ion-card>
         </ion-slide>
     </ion-slides>
-    <ion-button class="slogan" expand="full" color="light">Donate now</ion-button>
     <ion-grid [fixed]="true">
         <ion-row>
             <ion-col>

@@ -8,6 +8,7 @@ import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/na
     styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
+    private todos: any;
     options: NativeTransitionOptions = {
         direction: 'left',
         duration: 500,
@@ -49,6 +50,20 @@ export class HomePage implements OnInit {
     ];
     constructor(private nav: NavController, private router: Router, private nativePageTransitions: NativePageTransitions) {}
     ngOnInit() {
+        this.todos = [
+            {content: 'todo first',
+             duedate: '6/1'
+            },
+            {content: 'todo second',
+                duedate: '6/2'
+            },
+            {content: 'todo third',
+                duedate: '6/3'
+            },
+            {content: 'todo fourth',
+                duedate: '6/4'
+            }
+        ];
     }
     go() {
         this.nativePageTransitions.slide(this.options);
