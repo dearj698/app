@@ -13,10 +13,11 @@ export class UserService {
     private firstname: string;
     private email: string;
     private url: string;
+    private response = '';
   constructor(private httpclient: HttpClient, private router: Router, public alertController: AlertController,
               public toastCtrl: ToastController,
               public alertCtrl: AlertController,
-              public loadingCtrl: LoadingController,) {
+              public loadingCtrl: LoadingController, ) {
       this.url = 'http://localhost:8080/user?';
   }
     async presentAlert() {
@@ -73,7 +74,7 @@ export class UserService {
     }
   updateUser(password, lastname, firstname, email) {
       // tslint:disable-next-line:max-line-length
-      this.httpclient.get(this.url + 'password=' + password + '&' + 'lastname=' + lastname + '&' + 'firstname=' + firstname + '&' + 'email=' + email + '&withcredentials=true')
+      this.httpclient.get(this.url + 'password=' + password + '&' + 'lastname=' + lastname + '&' + 'firstname=' + firstname + '&' + 'email=' + email + '&withcredentials=true', {responseType: 'json'})
           .subscribe(
               data => {
                   console.log(data);
@@ -89,10 +90,11 @@ export class UserService {
   }
   checkUser(email, password) {
       this.httpclient.get('http://localhost:8080/user/login',  {
-          params : new HttpParams().set( 'email', email).set('password', password)
+          params : new HttpParams().set( 'email', email).set('password', password),
+          responseType: 'text'
       }).subscribe( response => {
           console.log(response);
-          if (response === true) {
+          if (response === 'true') {
                   this.router.navigate(['/home']);
                   this.presentAlert();
           } else {
@@ -100,4 +102,12 @@ export class UserService {
           }
       });
   }
-}
+
+  getUsers() {
+      this.httpclient.get('http://localhost:8080/users').subscribe(
+          data => {
+              this.response = JSON.stringify(data);
+              console.log('user service logs: ' + this.response);
+          }
+      );
+}}

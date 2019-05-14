@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions/ngx';
 import {ModalController} from '@ionic/angular';
 import {ListPage} from '../list/list.page';
+import {UserService} from '../services/user.service';
 
 @Component({
   selector: 'app-bookcase',
@@ -15,7 +16,7 @@ export class BookcasePage implements OnInit {
     private nameSelected: string;
     options: NativeTransitionOptions = {
         direction: 'left',
-        duration: 500,
+        duration: 100,
         slowdownfactor: -1,
         slidePixels: 20,
         iosdelay: 50,
@@ -23,7 +24,9 @@ export class BookcasePage implements OnInit {
         fixedPixelsTop: 0,
         fixedPixelsBottom: 60
     };
-  constructor(private router: Router, private nativePageTransitions: NativePageTransitions, private modalcontrol: ModalController) { }
+  constructor(private router: Router,
+              private nativePageTransitions: NativePageTransitions,
+              private modalcontrol: ModalController) { }
 
   ngOnInit() {
   }
@@ -34,7 +37,7 @@ export class BookcasePage implements OnInit {
         });
         modal.onDidDismiss()
             .then((data) => {
-                const sample= data;
+                const sample = data;
                 console.log(JSON.stringify(sample));
                 this.nameSelected = sample.data.result;
             });
