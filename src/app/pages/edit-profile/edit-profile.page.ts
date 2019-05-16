@@ -8,7 +8,8 @@ import { TranslateProvider } from '../../providers';
   styleUrls: ['./edit-profile.page.scss'],
 })
 export class EditProfilePage implements OnInit {
-
+ name: string;
+ email: string;
   constructor(
     public navCtrl: NavController, 
     public loadingCtrl: LoadingController, 
@@ -17,6 +18,8 @@ export class EditProfilePage implements OnInit {
     ) { }
 
   ngOnInit() {
+      this.name = localStorage.getItem('firstname');
+      this.email = localStorage.getItem('email');
   }
 
   async sendData() {

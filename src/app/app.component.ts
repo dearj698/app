@@ -96,7 +96,7 @@ initializeApp() {
       });
     });
     this.email = localStorage.getItem('email');
-    this.name = localStorage.getItem('name');
+    this.name = localStorage.getItem('firstname');
   }
   /**
    * Navigate to Edit Profile Page

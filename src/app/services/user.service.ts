@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {AlertController, LoadingController, ToastController} from '@ionic/angular';
 import {User} from '../user';
 import {Observable} from 'rxjs';
+import {error} from 'selenium-webdriver';
 
 @Injectable({
   providedIn: 'root'
@@ -15,34 +16,6 @@ export class UserService {
               public loadingCtrl: LoadingController, ) {
       this.url = 'http://192.168.0.104:8080/user?';
   }
-    async presentAlert() {
-        const alert = await this.alertController.create({
-            header: 'Successful',
-            subHeader: 'Registered into system',
-            message: 'you will be navigate to home page',
-            buttons: [{
-                text : 'OK',
-                handler: async () => {
-                    const loader = await this.loadingCtrl.create({
-                        duration: 2000
-                    });
-
-                    loader.present();
-                    loader.onWillDismiss().then(async l => {
-                        const toast = await this.toastCtrl.create({
-                            showCloseButton: true,
-                            duration: 3000,
-                            position: 'bottom'
-                        });
-
-                        toast.present();
-                    });
-                }}]
-        });
-
-        await alert.present();
-        this.router.navigate(['home']);
-    }
     async alertFail() {
         const alert = await this.alertController.create({
             header: 'FAIL',
@@ -52,7 +25,7 @@ export class UserService {
                 text : 'OK',
                 handler: async () => {
                     const loader = await this.loadingCtrl.create({
-                        duration: 2000
+                        duration: 1000
                     });
 
                     loader.onWillDismiss().then(async l => {
@@ -68,11 +41,11 @@ export class UserService {
         await alert.present();
     }
   updateUser(password, lastname, firstname, email) {
+      // tslint:disable-next-line:max-line-length
       this.httpclient.get(this.url + 'password=' + password + '&' + 'lastname=' + lastname + '&' + 'firstname=' + firstname + '&' + 'email=' + email + '&withcredentials=true' , {responseType: 'text'})
           .subscribe(
               data => {
                   console.log(data);
-                  this.presentAlert();
                   localStorage.setItem('passward', password);
                   localStorage.setItem('lastname', lastname);
                   localStorage.setItem('firstname', firstname);
@@ -86,16 +59,31 @@ export class UserService {
       this.httpclient.get('http://192.168.0.104:8080/user/login',  {
           params : new HttpParams().set( 'email', email).set('password', password),
           responseType: 'text'
-      }).subscribe( response => {
+      }).subscribe( async response => {
           console.log(response);
           if (response === '1') {
-                  this.router.navigate(['/home']);
-                  this.presentAlert();
+              const headers = new HttpHeaders().set('Content-Type', 'application/json');
+              this.httpclient.get<User>('http://192.168.0.104:8080/user/getUser?email=' + email , {headers: headers}).subscribe( data => {
+                  console.log('receive user: ' + JSON.stringify(data));
+                  localStorage.setItem('firstname', data.firstname);
+                  localStorage.setItem('lastname', data.lastname);
+              });
+              localStorage.setItem('email', email);
+              this.router.navigate(['/home']);
+              const loader = await this.loadingCtrl.create({
+                  duration: 1000
+              });
+
+              loader.present();
           } else {
               console.log('login fail');
               this.alertFail();
           }
-      });
+          // tslint:disable-next-line:no-shadowed-variable
+      }, ((error: any) => {
+          console.error('log in fail: ' + error );
+          this.alertFail();
+      }));
   }
 
     public findAll(): Observable<User[]> {
