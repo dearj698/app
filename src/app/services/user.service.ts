@@ -1,24 +1,19 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
-import {RequestOptions} from '@angular/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {AlertController, LoadingController, ToastController} from '@ionic/angular';
+import {User} from '../user';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-    private passward: string;
-    private lastname: string;
-    private firstname: string;
-    private email: string;
     private url: string;
-    private response = '';
   constructor(private httpclient: HttpClient, private router: Router, public alertController: AlertController,
               public toastCtrl: ToastController,
-              public alertCtrl: AlertController,
               public loadingCtrl: LoadingController, ) {
-      this.url = 'http://localhost:8080/user?';
+      this.url = 'http://192.168.0.104:8080/user?';
   }
     async presentAlert() {
         const alert = await this.alertController.create({
@@ -73,8 +68,7 @@ export class UserService {
         await alert.present();
     }
   updateUser(password, lastname, firstname, email) {
-      // tslint:disable-next-line:max-line-length
-      this.httpclient.get(this.url + 'password=' + password + '&' + 'lastname=' + lastname + '&' + 'firstname=' + firstname + '&' + 'email=' + email + '&withcredentials=true', {responseType: 'json'})
+      this.httpclient.get(this.url + 'password=' + password + '&' + 'lastname=' + lastname + '&' + 'firstname=' + firstname + '&' + 'email=' + email + '&withcredentials=true' , {responseType: 'text'})
           .subscribe(
               data => {
                   console.log(data);
@@ -89,25 +83,24 @@ export class UserService {
               });
   }
   checkUser(email, password) {
-      this.httpclient.get('http://localhost:8080/user/login',  {
+      this.httpclient.get('http://192.168.0.104:8080/user/login',  {
           params : new HttpParams().set( 'email', email).set('password', password),
           responseType: 'text'
       }).subscribe( response => {
           console.log(response);
-          if (response === 'true') {
+          if (response === '1') {
                   this.router.navigate(['/home']);
                   this.presentAlert();
           } else {
+              console.log('login fail');
               this.alertFail();
           }
       });
   }
 
-  getUsers() {
-      this.httpclient.get('http://localhost:8080/users').subscribe(
-          data => {
-              this.response = JSON.stringify(data);
-              console.log('user service logs: ' + this.response);
-          }
-      );
-}}
+    public findAll(): Observable<User[]> {
+        const headers = new HttpHeaders().set('Content-Type', 'application/json');
+        return this.httpclient.get<User[]>('http://192.168.0.104:8080/users', {headers : headers
+            });
+    }
+}
