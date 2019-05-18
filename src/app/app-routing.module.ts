@@ -25,6 +25,7 @@ const routes: Routes = [
     { path: 'list', loadChildren: './list/list.module#ListPageModule' },
   { path: 'boardlist', loadChildren: './boardlist/boardlist.module#BoardlistPageModule' },
   { path: 'bookcase', loadChildren: './bookcase/bookcase.module#BookcasePageModule' },
+  { path: 'preview', loadChildren: './preview/preview.module#PreviewPageModule' },
 
   // { path: 'walkthrough', loadChildren: './pages/walkthrough/walkthrough.module#WalkthroughPageModule' }
 ];

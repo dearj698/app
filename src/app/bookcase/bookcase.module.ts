@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions/ngx';
 
@@ -18,12 +18,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RouterModule.forChild(routes)
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        RouterModule.forChild(routes),
+        ReactiveFormsModule
+    ],
     providers: [NativePageTransitions],
   declarations: [BookcasePage]
 })

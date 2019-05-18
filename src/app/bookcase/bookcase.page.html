@@ -8,20 +8,21 @@
 </ion-header>
 
 <ion-content padding>
+    <form [formGroup]="onBookForm">
     <ion-card>
         <ion-card-content>
             <ion-card-subtitle color="dark">Time</ion-card-subtitle>
             <ion-item lines="inset">
                 <ion-label class="my-label" color="dark">Date</ion-label>
-                <ion-datetime display-format="MM/YYYY" picker-format="MMMM YYYY" placeholder="today's date"></ion-datetime>
+                <ion-datetime display-format="MM/YYYY" picker-format="MMMM YYYY" placeholder="today's date" formControlName="date"></ion-datetime> 
             </ion-item>
             <ion-item lines="inset">
                 <ion-label stacked color="dark" class="my-label"> Operation</ion-label>
-                <ion-input placeholder="                    warn"></ion-input>
+                <ion-input placeholder="                    warn" formControlName="operationType"></ion-input>
             </ion-item>
             <ion-item lines="inset">
                 <ion-label stacked color="dark" class="my-label"> hour</ion-label>
-                <ion-datetime display-format="HH:mm:ss" picker-format="HH:mm:ss" placeholder="total time"></ion-datetime>
+                <ion-datetime display-format="HH:mm:ss" picker-format="HH:mm:ss" placeholder="total time" formControlName="period"></ion-datetime>
             </ion-item>
         </ion-card-content>
     </ion-card>
@@ -40,7 +41,7 @@
         <ion-card-content>
             <ion-card-subtitle color="dark">Priority</ion-card-subtitle>
             <ion-item lines="none">
-                <ion-range min="1" max="4" step="1" snaps="true" ticks="false" color="dark"  [(ngModel)]="prioritySelected" (ionChange)="show(prioritySelected)"></ion-range>
+                <ion-range min="1" max="4" step="1" snaps="true" ticks="false" color="dark"  formControlName="prioritySelected" (ionChange)="show(onBookForm.get('prioritySelected').value)"></ion-range>
                 <ion-icon color="dark" size="small" slot="start" name="warning"></ion-icon>
                 <ion-icon color="dark" slot="end" name="warning"></ion-icon>
                 <ion-text color="secondary">{{priority}}</ion-text>
@@ -51,13 +52,14 @@
         <ion-card-content>
             <ion-card-subtitle color="dark">Equipment</ion-card-subtitle>
             <ion-item lines="none">
-                <ion-textarea rows="6" cols="20" placeholder="Enter any notes here..."></ion-textarea>
+                <ion-textarea rows="6" cols="20" placeholder="Enter any notes here..." formControlName="equipment"></ion-textarea>
             </ion-item>
             <ion-card-subtitle color="dark">Anatheria</ion-card-subtitle>
             <ion-item lines="none">
-                <ion-textarea rows="2" cols="4" placeholder="Enter any notes here..."></ion-textarea>
+                <ion-textarea rows="2" cols="4" placeholder="Enter any notes here..." formControlName="anatheria"></ion-textarea>
             </ion-item>
         </ion-card-content>
     </ion-card>
-    <ion-button align="center" class="buttonNext" expand="block" color="primary">Next</ion-button>
+    </form>
+    <ion-button align="center" class="buttonNext" expand="block" color="dark"  (click)="nextPage()" [disabled]="!onBookForm.valid">Next</ion-button>
 </ion-content>

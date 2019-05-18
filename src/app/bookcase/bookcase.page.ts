@@ -4,6 +4,10 @@ import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/na
 import {ModalController} from '@ionic/angular';
 import {ListPage} from '../list/list.page';
 import {UserService} from '../services/user.service';
+import {Form, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UserCase} from '../user-case';
+import any = jasmine.any;
+import {PreviewPage} from '../preview/preview.page';
 
 @Component({
   selector: 'app-bookcase',
@@ -11,9 +15,19 @@ import {UserService} from '../services/user.service';
   styleUrls: ['./bookcase.page.scss'],
 })
 export class BookcasePage implements OnInit {
+    onBookForm: FormGroup;
     private priority: number;
     private prioritySelected: number;
     private nameSelected: string;
+    private userCase: UserCase = {
+        date: ' ',
+    operationType: ' ',
+    period: ' ',
+    name: ' ',
+    priority: ' ',
+    equipment: ' ',
+    anatheria: ' ',
+    };
     options: NativeTransitionOptions = {
         direction: 'left',
         duration: 100,
@@ -26,9 +40,24 @@ export class BookcasePage implements OnInit {
     };
   constructor(private router: Router,
               private nativePageTransitions: NativePageTransitions,
-              private modalcontrol: ModalController) { }
+              private modalcontrol: ModalController,
+              private formBuilder: FormBuilder
+              ) { }
 
   ngOnInit() {
+      this.onBookForm = this.formBuilder.group({
+          'date': [null, Validators.compose([
+          ])],
+          'operationType': [null, Validators.compose([
+          ])],
+          'period': [null, Validators.compose([
+          ])],
+          'equipment': [null, Validators.compose([
+          ])],
+          'anatheria': [null, Validators.compose([
+          ])],
+          'prioritySelected': [null, Validators.compose([])]
+      });
   }
     async go() {
         const modal = await this.modalcontrol.create({
@@ -46,5 +75,20 @@ export class BookcasePage implements OnInit {
     show(priority: number) {
       this.priority = priority;
       console.log(priority);
+    }
+    async nextPage() {
+        this.userCase.date = this.onBookForm.get('date').value;
+        this.userCase.anatheria = this.onBookForm.get('anatheria').value;
+        this.userCase.equipment = this.onBookForm.get('equipment').value;
+        this.userCase.name = this.nameSelected;
+        this.userCase.operationType = this.onBookForm.get('operationType').value;
+        this.userCase.period = this.onBookForm.get('period').value;
+        this.userCase.priority = this.priority.toString();
+        const modal = await this.modalcontrol.create({
+            component: PreviewPage,
+            componentProps: {userCase: this.userCase}
+        });
+        console.log('created usercase: ' + JSON.stringify(this.userCase));
+        return await modal.present();
     }
 }

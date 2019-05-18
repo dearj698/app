@@ -25,6 +25,8 @@ import { TranslateProvider, HotelProvider } from './providers';
 import { ImagePageModule } from './pages/modal/image/image.module';
 import { LocationPageModule } from './pages/modal/location/location.module';
 import {ListPageModule} from './list/list.module';
+import {PreviewPage} from './preview/preview.page';
+import {PreviewPageModule} from './preview/preview.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -40,7 +42,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     ImagePageModule,
     LocationPageModule,
-    ListPageModule,  
+    ListPageModule,
+      PreviewPageModule,
     IonicStorageModule.forRoot({
       name: '__ionbooking2',
       driverOrder: ['indexeddb', 'sqlite', 'websql']

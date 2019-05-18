@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title color="dark">preview</ion-title>
+      <ion-buttons slot="start">
+          <ion-back-button color="dark" defaultHref="bookcase" (click)="close()"></ion-back-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-card>
+        <ion-ripple-effect></ion-ripple-effect>
+        <ion-card-header>
+            <ion-card-title  color="dark">Operation {{operationType}}</ion-card-title>
+            <ion-card-subtitle>{{period}} hour On {{date}}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-item  class="activated">
+            <ion-icon name="person" slot="start"></ion-icon>
+            <ion-label>Surgeon: {{name}}</ion-label>
+        </ion-item>
+
+        <ion-item>
+            <ion-icon name="cut" slot="start"></ion-icon>
+            <ion-label>Equipment: </ion-label>
+            <ion-card-content>{{equipment}}</ion-card-content>
+        </ion-item>
+
+        <ion-item class="activated">
+            <ion-icon name="warning" slot="start"></ion-icon>
+            <ion-label>Priority: {{priority}}</ion-label>
+        </ion-item>
+        
+        <ion-card-content>
+            Anatheria: {{anatheria}}
+        </ion-card-content>
+        <ion-item tappable>
+            <ion-icon name="create" slot="start" color="dark"></ion-icon>
+            <ion-label color="dark">confirm</ion-label>
+            <ion-button fill="outline" slot="end"  color="dark" (click)="confirm()">Yes</ion-button>
+            <ion-button fill="outline" slot="end" color="danger" (click)="close()">Edit</ion-button>
+        </ion-item>
+    </ion-card>
+    <ion-button expand="block" color="dark" style="width: 303px; margin-left: 20px" *ngIf="displayBtn">send</ion-button>
+</ion-content>

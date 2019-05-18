@@ -37,9 +37,12 @@ export class AuthenticationPage implements OnInit {
       ])]
     });
     this.onRegisterForm = this.formBuilder.group({
-      'fullName': [null, Validators.compose([
+      'FirstName': [null, Validators.compose([
         Validators.required
-      ])],
+            ])],
+      'LastName':  [null, Validators.compose(([
+          Validators.required
+      ]))],
       'email': [null, Validators.compose([
         Validators.required
       ])],
@@ -53,7 +56,8 @@ export class AuthenticationPage implements OnInit {
   }
   register() {
       // tslint:disable-next-line:max-line-length
-    this.Userclient.updateUser(this.onRegisterForm.get('password').value, this.onRegisterForm.get('fullName').value, 'Jerry', this.onRegisterForm.get('email').value);
+    this.Userclient.updateUser(this.onRegisterForm.get('password').value, this.onRegisterForm.get('LastName').value, this.onRegisterForm.get('FirstName').value, this.onRegisterForm.get('email').value);
+    this.router.navigate(['home']);
   }
   async forgotPass() {
     const alert = await this.alertCtrl.create({

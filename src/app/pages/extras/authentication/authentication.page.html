@@ -109,16 +109,27 @@
             <ion-item no-padding class="animated fadeInUp">
               <ion-label position="floating">
                 <ion-icon name="mail" item-start></ion-icon>
-                Full Name
+                Last Name
               </ion-label>
-              <ion-input color="secondary" type="text" formControlName="fullName"></ion-input>
+              <ion-input color="secondary" type="text" formControlName="LastName"></ion-input>
             </ion-item>
-            <p ion-text class="text08" *ngIf="onRegisterForm.get('fullName').touched && onRegisterForm.get('fullName').hasError('required')">
+            <p ion-text class="text08" *ngIf="onRegisterForm.get('LastName').touched  && onRegisterForm.get('LastName').hasError('required')">
               <ion-text color="danger">
                 This field is required
               </ion-text>
             </p>
-      
+            <ion-item no-padding class="animated fadeInUp">
+                <ion-label position="floating">
+                    <ion-icon name="mail" item-start></ion-icon>
+                    First Name
+                </ion-label>
+                <ion-input color="secondary" type="text" formControlName="FirstName"></ion-input>
+            </ion-item>
+            <p ion-text class="text08" *ngIf="onRegisterForm.get('FirstName').touched  && onRegisterForm.get('FirstName').hasError('required')">
+                <ion-text color="danger">
+                    This field is required
+                </ion-text>
+            </p>
             <ion-item no-padding class="animated fadeInUp">
               <ion-label position="floating">
                 <ion-icon name="mail" item-start></ion-icon>
