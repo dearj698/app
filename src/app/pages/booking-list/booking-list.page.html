@@ -18,20 +18,13 @@
         </ion-card>
   
         <ion-list>
-
-          <ion-item tappable routerLink="/hotel-detail/{{booking.hotel.id}}" *ngFor="let booking of bookings">
-            <ion-thumbnail slot="start">
-              <img [src]="booking.hotel.thumb">
-            </ion-thumbnail>
-            <ion-label>
-              <h2>
-                <ion-text color="primary">{{booking.hotel.name}}</ion-text>
-              </h2>
-              <p>{{booking.hotel.address}} ∙ {{booking.hotel.price | currency }}</p>
-              <ion-badge color="success">{{ 'app.label.booked' | translate }}</ion-badge>
-            </ion-label>
-          </ion-item>
-
+              <ion-card tappable *ngFor="let booking of bookings">
+                <ion-card-subtitle color="dark">name: {{booking.name}}</ion-card-subtitle>
+                <ion-card-subtitle color="dark">type: {{booking.operationType}}</ion-card-subtitle>
+              <ion-card-content>priority {{booking.priority}} by {{booking.date}}
+              </ion-card-content>
+                    
+          </ion-card>
         </ion-list>
 
       </ion-col>

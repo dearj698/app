@@ -4,6 +4,7 @@
       <ion-buttons slot="start">
           <ion-back-button color="dark" defaultHref="bookcase" (click)="close()"></ion-back-button>
       </ion-buttons>
+      
   </ion-toolbar>
 </ion-header>
 
@@ -21,7 +22,7 @@
 
         <ion-item>
             <ion-icon name="cut" slot="start"></ion-icon>
-            <ion-label>Equipment: </ion-label>
+            <ion-label>Equip: </ion-label>
             <ion-card-content>{{equipment}}</ion-card-content>
         </ion-item>
 
@@ -40,5 +41,4 @@
             <ion-button fill="outline" slot="end" color="danger" (click)="close()">Edit</ion-button>
         </ion-item>
     </ion-card>
-    <ion-button expand="block" color="dark" style="width: 303px; margin-left: 20px" *ngIf="displayBtn">send</ion-button>
 </ion-content>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions/ngx';
-import {ModalController} from '@ionic/angular';
+import {AlertController, LoadingController, ModalController, ToastController} from '@ionic/angular';
 import {ListPage} from '../list/list.page';
 import {UserService} from '../services/user.service';
 import {Form, FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -19,6 +19,7 @@ export class BookcasePage implements OnInit {
     private priority: number;
     private prioritySelected: number;
     private nameSelected: string;
+    private showBtn = false;
     private userCase: UserCase = {
         date: ' ',
     operationType: ' ',
@@ -41,8 +42,11 @@ export class BookcasePage implements OnInit {
   constructor(private router: Router,
               private nativePageTransitions: NativePageTransitions,
               private modalcontrol: ModalController,
-              private formBuilder: FormBuilder
-              ) { }
+              private formBuilder: FormBuilder,
+              public alertController: AlertController,
+              public toastCtrl: ToastController,
+              public loadingCtrl: LoadingController,
+  ) { }
 
   ngOnInit() {
       this.onBookForm = this.formBuilder.group({
@@ -88,7 +92,29 @@ export class BookcasePage implements OnInit {
             component: PreviewPage,
             componentProps: {userCase: this.userCase}
         });
+        modal.onDidDismiss()
+            .then((data) => {
+                console.log('load data back: ' + JSON.stringify(data));
+                if (data.data.userCase === 'true') {
+                    this.showBtn = true;
+                }
+            });
         console.log('created usercase: ' + JSON.stringify(this.userCase));
         return await modal.present();
+    }
+    gotoList() {
+      this.alertSuccess();
+      this.router.navigate(['booking-list']);
+    }
+
+    async alertSuccess() {
+        const alert = await this.alertController.create({
+            header: 'Success',
+            subHeader: 'Book successful',
+            buttons: [{
+                text : 'OK'}]
+        });
+
+        alert.present();
     }
 }

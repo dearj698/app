@@ -6,6 +6,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { PreviewPage } from './preview.page';
+import {BookingListPage} from '../pages/booking-list/booking-list.page';
+import {BookingListPageModule} from '../pages/booking-list/booking-list.module';
 
 const routes: Routes = [
   {
@@ -19,6 +21,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+      BookingListPageModule,
     RouterModule.forChild(routes)
   ],
   declarations: [PreviewPage]
