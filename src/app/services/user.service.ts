@@ -45,7 +45,7 @@ export class UserService {
         const alert = await this.alertController.create({
             header: 'Success',
             subHeader: 'registered successful',
-            message: 'you will be navigate to home page',
+            message: 'please login now',
             buttons: [{
                 text : 'OK',
                 handler: async () => {
@@ -71,6 +71,8 @@ export class UserService {
           .subscribe(
               data => {
                   console.log(data);
+                  localStorage.setItem('token' , JSON.parse(data).token);
+                  console.log('generated token: ' + JSON.parse(data).token);
                   localStorage.setItem('passward', password);
                   localStorage.setItem('lastname', lastname);
                   localStorage.setItem('firstname', firstname);
