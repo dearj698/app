@@ -11,7 +11,7 @@ import {UserCase} from './user-case';
 export class UserCaseService {
     private url: string;
   constructor(private httpclient: HttpClient) {
-      this.url = 'http://192.168.0.103:8080/bookcase?';
+      this.url = 'http://18.217.166.228:8080/bookcase?';
   }
   addCase(priority, email, anatheria, date , period, equipment, operationType , name) {
       // tslint:disable-next-line:max-line-length
@@ -27,7 +27,7 @@ export class UserCaseService {
   }
   getCases(): Observable<UserCase[]> {
       const headers = new HttpHeaders().set('Content-Type', 'application/json').set('token' , localStorage.getItem('token'));
-      return this.httpclient.get<UserCase[]>('http://192.168.0.103:8080/getCases', {headers : headers
+      return this.httpclient.get<UserCase[]>('http://18.217.166.228:8080/getCases', {headers : headers
       });
   }
 }

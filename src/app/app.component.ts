@@ -97,6 +97,8 @@ initializeApp() {
     });
     this.email = localStorage.getItem('email');
     this.name = localStorage.getItem('firstname');
+    console.log('email is ' + localStorage.getItem('email'));
+    console.log('firstname is ' +  localStorage.getItem('firstname'));
   }
   /**
    * Navigate to Edit Profile Page
@@ -112,6 +114,7 @@ initializeApp() {
  * @memberof AppComponent
  */
 logout() {
+    localStorage.clear();
     this.navCtrl.navigateRoot('extras/authentication');
   }
 }

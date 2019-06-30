@@ -14,7 +14,7 @@ export class UserService {
   constructor(private httpclient: HttpClient, private router: Router, public alertController: AlertController,
               public toastCtrl: ToastController,
               public loadingCtrl: LoadingController, ) {
-      this.url = 'http://192.168.0.103:8080/user?';
+      this.url = 'http://18.217.166.228:8080/user?';
   }
     async alertFail() {
         const alert = await this.alertController.create({
@@ -77,14 +77,13 @@ export class UserService {
                   localStorage.setItem('lastname', lastname);
                   localStorage.setItem('firstname', firstname);
                   localStorage.setItem('email', email);
-                  this.alertSuccess();
               },
               (err: HttpErrorResponse) => {
                   console.log(err);
               });
   }
   checkUser(email, password) {
-      this.httpclient.get('http://192.168.0.103:8080/user/login',  {
+      this.httpclient.get('http://18.217.166.228:8080/user/login',  {
           params : new HttpParams().set( 'email', email).set('password', password),
           responseType: 'text'
       }).subscribe( async response => {
@@ -93,7 +92,7 @@ export class UserService {
               localStorage.setItem('token' , JSON.parse(response).token);
               console.log('receive token' + localStorage.getItem('token'));
               const headers = new HttpHeaders().set('Content-Type', 'application/json').set('token' , localStorage.getItem('token'));
-              this.httpclient.get<User>('http://192.168.0.103:8080/user/getUser?email=' + email , {headers: headers}).subscribe( data => {
+              this.httpclient.get<User>('http://18.217.166.228:8080/user/getUser?email=' + email , {headers: headers}).subscribe( data => {
                   console.log('receive user: ' + JSON.stringify(data));
                   localStorage.setItem('firstname', data.firstname);
                   localStorage.setItem('lastname', data.lastname);
@@ -118,7 +117,7 @@ export class UserService {
 
     public findAll(): Observable<User[]> {
         const headers = new HttpHeaders().set('Content-Type', 'application/json').set('token' , localStorage.getItem('token'));
-        return this.httpclient.get<User[]>('http://192.168.0.103:8080/users', {headers : headers
+        return this.httpclient.get<User[]>('http://18.217.166.228:8080/users', {headers : headers
             });
     }
 }
