@@ -9,7 +9,7 @@
     },
     "scripts": {
         "ng": "ng",
-        "start": "ng serve",
+        "start": "ng build",
         "build": "ng build",
         "test": "ng test",
         "lint": "ng lint",
