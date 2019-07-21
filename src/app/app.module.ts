@@ -71,6 +71,5 @@ export function HttpLoaderFactory(http: HttpClient) {
   
   bootstrap: [AppComponent]
 })
-enableProdMode();
 
 export class AppModule {}
