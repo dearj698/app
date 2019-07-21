@@ -27,6 +27,7 @@ import { LocationPageModule } from './pages/modal/location/location.module';
 import {ListPageModule} from './list/list.module';
 import {PreviewPage} from './preview/preview.page';
 import {PreviewPageModule} from './preview/preview.module';
+import {enableProdMode} from '@angular/core';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -67,6 +68,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     TranslateProvider,
     HotelProvider
   ],
+  
   bootstrap: [AppComponent]
 })
+enableProdMode();
+
 export class AppModule {}
