@@ -61,6 +61,6 @@
         </ion-card-content>
     </ion-card>
     </form>
-    <ion-button align="center" class="buttonNext" expand="block" color="light"  (click)="nextPage()" [disabled]="!onBookForm.valid">Next</ion-button>
-    <ion-button color="dark" align="center" class="buttonNext" expand="block"  (click)="gotoList()" *ngIf="showBtn">send</ion-button>
+    <ion-button align="center" class="buttonNext" expand="block" color="secondary"   (click)="nextPage()" [disabled]="!onBookForm.valid">Next</ion-button>
+    <ion-button color="dark" align="center" class="buttonNext" expand="block"    (click)="gotoList()" *ngIf="showBtn">send</ion-button>
 </ion-content>
