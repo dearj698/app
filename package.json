@@ -1,11 +1,9 @@
 {
-    "name": "ionBooking",
-    "version": "2.0.3",
-    "homepage": "https://market.ionicframework.com/themes/ionbooking2",
+    "name": "HosTream",
+    "version": "0.8.9",
     "author": {
-        "name": "Ionic Theme",
-        "email": "firminoata@gmail.com",
-        "url": "https://ionictheme.com"
+        "name": "Jerry",
+        "email": "karen698698@gmail.com"
     },
     "scripts": {
         "ng": "ng",
@@ -74,6 +72,7 @@
         "@types/jasmine": "~2.8.9",
         "@types/jasminewd2": "~2.0.5",
         "@types/node": "~10.11.5",
+        "angular-cli-ghpages": "^0.5.3",
         "codelyzer": "~4.5.0",
         "esdoc": "^1.1.0",
         "esdoc-importpath-plugin": "^1.0.2",
@@ -91,7 +90,7 @@
         "tslint": "~5.11.0",
         "typescript": "~2.9.2"
     },
-    "description": "ionBooking2: Ionic 4 Hotel Booking Theme",
+    "description": "HosTream: modern monitoring system for health care",
     "cordova": {
         "plugins": {
             "cordova-sqlite-storage": {},
