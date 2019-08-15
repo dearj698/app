@@ -15,7 +15,7 @@ export class UserService {
     constructor(private httpclient: HttpClient, private router: Router, public alertController: AlertController,
         public toastCtrl: ToastController,
         public loadingCtrl: LoadingController, ) {
-        this.url = 'http://localhost:5000/user';
+        this.url = 'https://young-depths-26026.herokuapp.com/user';
     }
     async alertFail() {
         const alert = await this.alertController.create({
@@ -98,12 +98,12 @@ export class UserService {
             msg:string;
             Authorization:string;
         }
-        this.httpclient.post<response>('http://localhost:5000/user/login', body.toString(), httpOptions).subscribe(async res => {
+        this.httpclient.post<response>('https://young-depths-26026.herokuapp.com/user/login', body.toString(), httpOptions).subscribe(async res => {
               if (res !== null) {
                   localStorage.setItem('token' ,res.Authorization);
                   console.log('receive token' + localStorage.getItem('token'));
                   const headers = new HttpHeaders().set('Content-Type', 'application/json').set('token' , localStorage.getItem('token'));
-                  this.httpclient.get<User>('http://localhost:5000/user/getUserByEmail/' + email , {headers: headers}).subscribe( data => {
+                  this.httpclient.get<User>('https://young-depths-26026.herokuapp.com/user/getUserByEmail/' + email , {headers: headers}).subscribe( data => {
                       console.log('receive user: ' + JSON.stringify(data));
                       localStorage.setItem('firstname', data.firstname);
                       localStorage.setItem('lastname', data.lastname);
@@ -128,7 +128,7 @@ export class UserService {
 
     public findAll(): Observable<User[]> {
         const headers = new HttpHeaders().set('Content-Type', 'application/json').set('token', localStorage.getItem('token'));
-        return this.httpclient.get<User[]>('http://localhost:5000/user/getUsers', {
+        return this.httpclient.get<User[]>('https://young-depths-26026.herokuapp.com/user/getUsers', {
             headers: headers
         });
     }

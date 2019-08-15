@@ -11,7 +11,7 @@ import { UserCase } from './user-case';
 export class UserCaseService {
     private url: string;
     constructor(private httpclient: HttpClient) {
-        this.url = 'http://localhost:5000/usercase';
+        this.url = 'https://young-depths-26026.herokuapp.com/usercase';
     }
     addCase(priority, email, anatheria, date, period, equipment, operationType, name) {
         const body = new HttpParams()
