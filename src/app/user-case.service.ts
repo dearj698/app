@@ -1,33 +1,45 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {Router} from '@angular/router';
-import {User} from './user';
-import {Observable} from 'rxjs';
-import {UserCase} from './user-case';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { User } from './user';
+import { Observable } from 'rxjs';
+import { UserCase } from './user-case';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class UserCaseService {
     private url: string;
-  constructor(private httpclient: HttpClient) {
-      this.url = 'http://18.217.166.228:8080/bookcase?';
-  }
-  addCase(priority, email, anatheria, date , period, equipment, operationType , name) {
-      // tslint:disable-next-line:max-line-length
-      const headers = new HttpHeaders().set('token' , localStorage.getItem('token'));
-      this.httpclient.get(this.url + 'priority=' + priority + '&email=' + email + '&anatheria=' + anatheria + '&date=' +
-          date + '&period=' + period + '&equipment=' + equipment + '&operationType=' + operationType + '&name=' + name , {headers : headers
-      } ).subscribe(data => {
-              console.log('booked case' + JSON.stringify(data));
-      },
-          (err: HttpErrorResponse) => {
-              console.log(err);
-          });
-  }
-  getCases(): Observable<UserCase[]> {
-      const headers = new HttpHeaders().set('Content-Type', 'application/json').set('token' , localStorage.getItem('token'));
-      return this.httpclient.get<UserCase[]>('http://18.217.166.228:8080/getCases', {headers : headers
-      });
-  }
+    constructor(private httpclient: HttpClient) {
+        this.url = 'http://localhost:5000/usercase';
+    }
+    addCase(priority, email, anatheria, date, period, equipment, operationType, name) {
+        const body = new HttpParams()
+            .set('email', email)
+            .set('priority', priority)
+            .set('anatheria', anatheria)
+            .set('date', date)
+            .set('period', period)
+            .set('equipment', equipment)
+            .set('operationType', operationType)
+            .set('name', name)
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'token': localStorage.getItem('token')
+            })
+        };
+        this.httpclient.post(this.url+'/bookcase', body, httpOptions).subscribe(res =>{
+            console.log('booked case'+res)
+        }, (err: HttpErrorResponse)=>{
+            console.log(err)
+        })
+
+    }
+    getCases(): Observable<UserCase[]> {
+        const headers = new HttpHeaders().set('Content-Type', 'application/json').set('token', localStorage.getItem('token'));
+        return this.httpclient.get<UserCase[]>(this.url+'/getcases', {
+            headers: headers
+        });
+    }
 }

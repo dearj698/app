@@ -1,28 +1,29 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Router} from '@angular/router';
-import {AlertController, LoadingController, ToastController} from '@ionic/angular';
-import {User} from '../user';
-import {Observable} from 'rxjs';
-import {error} from 'selenium-webdriver';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
+import { User } from '../user';
+import { Observable } from 'rxjs';
+import { error } from 'selenium-webdriver';
+import { RequestOptions } from '@angular/http';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class UserService {
     private url: string;
-  constructor(private httpclient: HttpClient, private router: Router, public alertController: AlertController,
-              public toastCtrl: ToastController,
-              public loadingCtrl: LoadingController, ) {
-      this.url = 'http://18.217.166.228:8080/user?';
-  }
+    constructor(private httpclient: HttpClient, private router: Router, public alertController: AlertController,
+        public toastCtrl: ToastController,
+        public loadingCtrl: LoadingController, ) {
+        this.url = 'http://localhost:5000/user';
+    }
     async alertFail() {
         const alert = await this.alertController.create({
             header: 'FAIL',
             subHeader: 'wrong email or password',
             message: 'please double check your email or password and retry',
             buttons: [{
-                text : 'OK',
+                text: 'OK',
                 handler: async () => {
                     const loader = await this.loadingCtrl.create({
                         duration: 1000
@@ -35,7 +36,8 @@ export class UserService {
                             position: 'bottom'
                         });
                     });
-                }}]
+                }
+            }]
         });
 
         await alert.present();
@@ -47,7 +49,7 @@ export class UserService {
             subHeader: 'registered successful',
             message: 'please login now',
             buttons: [{
-                text : 'OK',
+                text: 'OK',
                 handler: async () => {
                     const loader = await this.loadingCtrl.create({
                         duration: 1000
@@ -60,64 +62,74 @@ export class UserService {
                             position: 'bottom'
                         });
                     });
-                }}]
+                }
+            }]
         });
 
         await alert.present();
     }
-  updateUser(password, lastname, firstname, email) {
-      // tslint:disable-next-line:max-line-length
-      this.httpclient.get(this.url + 'password=' + password + '&' + 'lastname=' + lastname + '&' + 'firstname=' + firstname + '&' + 'email=' + email + '&withcredentials=true' , {responseType: 'text'})
-          .subscribe(
-              data => {
-                  console.log(data);
-                  localStorage.setItem('token' , JSON.parse(data).token);
-                  console.log('generated token: ' + JSON.parse(data).token);
-                  localStorage.setItem('passward', password);
-                  localStorage.setItem('lastname', lastname);
-                  localStorage.setItem('firstname', firstname);
-                  localStorage.setItem('email', email);
-              },
-              (err: HttpErrorResponse) => {
-                  console.log(err);
-              });
-  }
-  checkUser(email, password) {
-      this.httpclient.get('http://18.217.166.228:8080/user/login',  {
-          params : new HttpParams().set( 'email', email).set('password', password),
-          responseType: 'text'
-      }).subscribe( async response => {
-          console.log('get json: ' + response);
-          if (response !== null) {
-              localStorage.setItem('token' , JSON.parse(response).token);
-              console.log('receive token' + localStorage.getItem('token'));
-              const headers = new HttpHeaders().set('Content-Type', 'application/json').set('token' , localStorage.getItem('token'));
-              this.httpclient.get<User>('http://18.217.166.228:8080/user/getUser?email=' + email , {headers: headers}).subscribe( data => {
-                  console.log('receive user: ' + JSON.stringify(data));
-                  localStorage.setItem('firstname', data.firstname);
-                  localStorage.setItem('lastname', data.lastname);
-              });
-              localStorage.setItem('email', email);
-              this.router.navigate(['/home']);
-              const loader = await this.loadingCtrl.create({
-                  duration: 1000
-              });
+    updateUser(password, lastname, firstname, email) {
 
-              loader.present();
-          } else {
-              console.log('login fail');
-              this.alertFail();
-          }
-          // tslint:disable-next-line:no-shadowed-variable
-      }, ((error: any) => {
-          console.error('log in fail: ' + error );
-          this.alertFail();
-      }));
-  }
+        const body = new HttpParams()
+            .set('email', email)
+            .set('password', password)
+            .set('firstname', firstname)
+            .set('lastname', lastname)
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/x-www-form-urlencoded',
+            })
+        };
+        return this.httpclient.post(this.url + '/register', body.toString(), httpOptions).subscribe(res => {
+            console.log(res);
+        })
+
+    }
+    checkUser(email, password) {
+        const body = new HttpParams()
+            .set('email', email)
+            .set('password', password)
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/x-www-form-urlencoded',
+            })
+        }; 
+        interface response  {
+            msg:string;
+            Authorization:string;
+        }
+        this.httpclient.post<response>('http://localhost:5000/user/login', body.toString(), httpOptions).subscribe(async res => {
+              if (res !== null) {
+                  localStorage.setItem('token' ,res.Authorization);
+                  console.log('receive token' + localStorage.getItem('token'));
+                  const headers = new HttpHeaders().set('Content-Type', 'application/json').set('token' , localStorage.getItem('token'));
+                  this.httpclient.get<User>('http://localhost:5000/user/getUserByEmail/' + email , {headers: headers}).subscribe( data => {
+                      console.log('receive user: ' + JSON.stringify(data));
+                      localStorage.setItem('firstname', data.firstname);
+                      localStorage.setItem('lastname', data.lastname);
+                  });
+                  localStorage.setItem('email', email);
+                  this.router.navigate(['/home']);
+                  const loader = await this.loadingCtrl.create({
+                      duration: 1000
+                  });
+
+                  loader.present();
+              } else {
+                  console.log('login fail');
+                  this.alertFail();
+              }
+            // tslint:disable-next-line:no-shadowed-variable
+        }, ((error: any) => {
+            console.error('log in fail: ' + error);
+            this.alertFail();
+        }));
+    }
 
     public findAll(): Observable<User[]> {
-        const headers = new HttpHeaders().set('Content-Type', 'application/json').set('token' , localStorage.getItem('token'));
-        return this.httpclient.get<User[]>('http://18.217.166.228:8080/users', {headers : headers
-            });
+        const headers = new HttpHeaders().set('Content-Type', 'application/json').set('token', localStorage.getItem('token'));
+        return this.httpclient.get<User[]>('http://localhost:5000/user/getUsers', {
+            headers: headers
+        });
     }
 }
