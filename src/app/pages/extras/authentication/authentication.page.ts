@@ -4,6 +4,7 @@ import { NavController, MenuController, ToastController, AlertController, Loadin
 import { TranslateProvider } from '../../../providers';
 import {Router} from '@angular/router';
 import {UserService} from '../../../services/user.service';
+import {delay} from 'rxjs/operators';
 
 @Component({
   selector: 'app-authentication',
@@ -24,7 +25,8 @@ export class AuthenticationPage implements OnInit {
     private translate: TranslateProvider,
     private formBuilder: FormBuilder,
     private router: Router,
-    private Userclient: UserService
+    private Userclient: UserService,
+    public loadingController: LoadingController
   ) { }
 
   ngOnInit() {
@@ -51,13 +53,25 @@ export class AuthenticationPage implements OnInit {
       ])]
     });
   }
-  login() {
+    async login() {
+      const loading = await this.loadingController.create({
+          message: 'Logining in....',
+          duration: 2000
+      });
+      await loading.present();
       this.Userclient.checkUser(this.onLoginForm.get('email').value, this.onLoginForm.get('password').value);
   }
-  register() {
+  async register() {
+      const loading = await this.loadingController.create({
+          message: 'regstering....',
+          duration: 100
+      });
+      await loading.present();
+
       // tslint:disable-next-line:max-line-length
     this.Userclient.updateUser(this.onRegisterForm.get('password').value, this.onRegisterForm.get('LastName').value, this.onRegisterForm.get('FirstName').value, this.onRegisterForm.get('email').value);
   }
+
   async forgotPass() {
     const alert = await this.alertCtrl.create({
       header: this.translate.get('app.pages.login.label.forgot'),

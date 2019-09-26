@@ -82,7 +82,7 @@ export class UserService {
         };
         return this.httpclient.post(this.url + '/register', body.toString(), httpOptions).subscribe(res => {
             console.log(res);
-        })
+        });
 
     }
     checkUser(email, password) {
@@ -93,10 +93,10 @@ export class UserService {
             headers: new HttpHeaders({
                 'Content-Type': 'application/x-www-form-urlencoded',
             })
-        }; 
+        };
         interface response  {
-            msg:string;
-            Authorization:string;
+            msg: string;
+            Authorization: string;
         }
         this.httpclient.post<response>('https://young-depths-26026.herokuapp.com/user/login', body.toString(), httpOptions).subscribe(async res => {
               if (res !== null) {
@@ -110,11 +110,6 @@ export class UserService {
                   });
                   localStorage.setItem('email', email);
                   this.router.navigate(['/home']);
-                  const loader = await this.loadingCtrl.create({
-                      duration: 1000
-                  });
-
-                  loader.present();
               } else {
                   console.log('login fail');
                   this.alertFail();

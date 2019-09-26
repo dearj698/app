@@ -11,7 +11,8 @@
         "build": "ng build",
         "test": "ng test",
         "lint": "ng lint",
-        "e2e": "ng e2e"    },
+        "e2e": "ng e2e"
+    },
     "private": true,
     "dependencies": {
         "@agm/core": "^1.0.0-beta.5",
@@ -52,6 +53,7 @@
         "core-js": "^2.5.3",
         "cors": "^2.8.5",
         "express": "^4.17.1",
+        "ionic": "^5.2.8",
         "morgan": "^1.9.1",
         "rxjs": "6.3.3",
         "rxjs-compat": "^6.3.3",
