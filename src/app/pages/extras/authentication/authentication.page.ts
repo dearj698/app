@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NavController, MenuController, ToastController, AlertController, LoadingController } from '@ionic/angular';
+import {NavController, MenuController, ToastController, AlertController, LoadingController, Events} from '@ionic/angular';
 import { TranslateProvider } from '../../../providers';
 import {Router} from '@angular/router';
 import {UserService} from '../../../services/user.service';
@@ -15,7 +15,10 @@ export class AuthenticationPage implements OnInit {
   onLoginForm: FormGroup;
   onRegisterForm: FormGroup;
   authSegment: String = 'login';
-
+  alertMsg: String = '';
+  alertDisplay:  boolean;
+  successMsg: String = '';
+  successDisplay: boolean;
   constructor(
     public navCtrl: NavController,
     public menuCtrl: MenuController,
@@ -26,7 +29,8 @@ export class AuthenticationPage implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private Userclient: UserService,
-    public loadingController: LoadingController
+    public loadingController: LoadingController,
+    public eventCtrl: Events
   ) { }
 
   ngOnInit() {
@@ -53,6 +57,8 @@ export class AuthenticationPage implements OnInit {
       ])]
     });
   }
+
+    
     async login() {
       const loading = await this.loadingController.create({
           message: 'Logining in....',
@@ -60,6 +66,10 @@ export class AuthenticationPage implements OnInit {
       });
       await loading.present();
       this.Userclient.checkUser(this.onLoginForm.get('email').value, this.onLoginForm.get('password').value);
+        this.eventCtrl.subscribe('login:fail', (message) => {
+            this.alertMsg = message;
+            this.alertDisplay = true;
+        });
   }
   async register() {
       const loading = await this.loadingController.create({
@@ -70,6 +80,10 @@ export class AuthenticationPage implements OnInit {
 
       // tslint:disable-next-line:max-line-length
     this.Userclient.updateUser(this.onRegisterForm.get('password').value, this.onRegisterForm.get('LastName').value, this.onRegisterForm.get('FirstName').value, this.onRegisterForm.get('email').value);
+      this.eventCtrl.subscribe('registered', (message) => {
+          this.successMsg = message;
+          this.successDisplay = true;
+      });
   }
 
   async forgotPass() {

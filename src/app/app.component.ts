@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Platform, NavController } from '@ionic/angular';
+import { Platform, NavController , Events} from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
@@ -47,7 +47,8 @@ export class AppComponent {
     private statusBar: StatusBar,
     private translate: TranslateProvider,
     private translateService: TranslateService,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    public eventCtrl: Events
   ) {
     this.appPages = [
       {
@@ -78,6 +79,10 @@ export class AppComponent {
  * @memberof AppComponent
  */
 initializeApp() {
+    this.eventCtrl.subscribe('user:login', (firstname, email) => {
+        this.name = firstname;
+        this.email = email;
+    });
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
@@ -95,11 +100,8 @@ initializeApp() {
         this.translate.setTranslations(translations);
       });
     });
-    this.email = localStorage.getItem('email');
-    this.name = localStorage.getItem('firstname');
-    console.log('email is ' + localStorage.getItem('email'));
-    console.log('firstname is ' +  localStorage.getItem('firstname'));
   }
+
   /**
    * Navigate to Edit Profile Page
    *
@@ -117,4 +119,5 @@ logout() {
     localStorage.clear();
     this.navCtrl.navigateRoot('extras/authentication');
   }
+  
 }

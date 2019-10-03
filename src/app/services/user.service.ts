@@ -1,11 +1,10 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Injectable} from '@angular/core';
+import { HttpClient,  HttpHeaders, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { AlertController, LoadingController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController, Events } from '@ionic/angular';
 import { User } from '../user';
 import { Observable } from 'rxjs';
-import { error } from 'selenium-webdriver';
-import { RequestOptions } from '@angular/http';
+
 
 @Injectable({
     providedIn: 'root'
@@ -14,9 +13,10 @@ export class UserService {
     private url: string;
     constructor(private httpclient: HttpClient, private router: Router, public alertController: AlertController,
         public toastCtrl: ToastController,
-        public loadingCtrl: LoadingController, ) {
+        public loadingCtrl: LoadingController, public eventCtrl: Events) {
         this.url = 'https://young-depths-26026.herokuapp.com/user';
     }
+
     async alertFail() {
         const alert = await this.alertController.create({
             header: 'FAIL',
@@ -42,7 +42,31 @@ export class UserService {
 
         await alert.present();
     }
+    async alertRegisFail() {
+        const alert = await this.alertController.create({
+            header: 'FAIL',
+            subHeader: 'User already existed',
+            message: 'please double check your email or password and retry',
+            buttons: [{
+                text: 'OK',
+                handler: async () => {
+                    const loader = await this.loadingCtrl.create({
+                        duration: 1000
+                    });
 
+                    loader.onWillDismiss().then(async l => {
+                        const toast = await this.toastCtrl.create({
+                            showCloseButton: true,
+                            duration: 3000,
+                            position: 'bottom'
+                        });
+                    });
+                }
+            }]
+        });
+
+        await alert.present();
+    }
     async alertSuccess() {
         const alert = await this.alertController.create({
             header: 'Success',
@@ -82,7 +106,11 @@ export class UserService {
         };
         return this.httpclient.post(this.url + '/register', body.toString(), httpOptions).subscribe(res => {
             console.log(res);
-        });
+            this.eventCtrl.publish('registered', 'please login now');
+        }, ((error1: any) => {
+            console.log('register error');
+            this.alertRegisFail();
+        }));
 
     }
     checkUser(email, password) {
@@ -107,17 +135,24 @@ export class UserService {
                       console.log('receive user: ' + JSON.stringify(data));
                       localStorage.setItem('firstname', data.firstname);
                       localStorage.setItem('lastname', data.lastname);
+                      localStorage.setItem('email', email);
+                      this.eventCtrl.publish('user:login', data.firstname, email);
+                      this.router.navigate(['/home']);
+                  }, error => {
+                      console.log('login fail');
+                      this.eventCtrl.publish('login:fail', 'please check user name or email');
+
                   });
-                  localStorage.setItem('email', email);
-                  this.router.navigate(['/home']);
               } else {
                   console.log('login fail');
-                  this.alertFail();
+                  this.eventCtrl.publish('login:fail', 'please check user name or email');
+
               }
             // tslint:disable-next-line:no-shadowed-variable
         }, ((error: any) => {
             console.error('log in fail: ' + error);
-            this.alertFail();
+            this.eventCtrl.publish('login:fail', 'please check user name or email');
+
         }));
     }
 

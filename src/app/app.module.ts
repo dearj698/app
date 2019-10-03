@@ -46,7 +46,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ListPageModule,
       PreviewPageModule,
     IonicStorageModule.forRoot({
-      name: '__ionbooking2',
+      name: 'Hostream',
       driverOrder: ['indexeddb', 'sqlite', 'websql']
     }),
     TranslateModule.forRoot({
