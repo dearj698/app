@@ -3,4 +3,4 @@ This project is the product of an innovative initiative for the london health sc
 This is the front end demo built with angular. Right now the we don't have the backend running due to the nature of the product being non-profit. But please feel free to check it out the main page at 
 https://dearjjjjjj.github.io/app/home
 
-For any questions and ideas, you can also reach out to me at zliu633@uwo.ca
+For any questions and ideas, you can also reach out to me at jerry_zhaohua@outlook.com
